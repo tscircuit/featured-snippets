@@ -46,7 +46,7 @@ export const SN74LS93N = (props: Props) => {
         },
       }}
       supplierPartNumbers={{
-        lcsc: ["C140325"],
+        jlcpcb: ["C140325"],
       }}
       footprint={
         <footprint>

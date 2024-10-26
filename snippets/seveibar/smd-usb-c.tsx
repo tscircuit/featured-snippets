@@ -60,34 +60,46 @@ export const SmdUsbC = (props: Props) => {
           <platedhole
             portHints={["alt_2"]}
             pcbX="4.32511199999999mm"
-            pcbY="-2.4990869499999917mm"
-            outerDiameter="1.1999975999999999mm"
-            holeDiameter="0.7999983999999999mm"
-            shape="circle"
+            pcbY="-2.7740863499999477mm"
+            outerHeight="1.7999964mm"
+            outerWidth="1.1999975999999999mm"
+            innerHeight="1.3999972mm"
+            innerWidth="0.7999983999999999mm"
+            height="1.3999972mm"
+            shape="pill"
           />
           <platedhole
             portHints={["alt_1"]}
             pcbX="4.32511199999999mm"
-            pcbY="1.6807370499998342mm"
-            outerDiameter="1.1999975999999999mm"
-            holeDiameter="0.7999983999999999mm"
-            shape="circle"
+            pcbY="1.4057376499998782mm"
+            outerHeight="1.9999959999999999mm"
+            outerWidth="1.1999975999999999mm"
+            innerHeight="1.5999968mm"
+            innerWidth="0.7999983999999999mm"
+            height="1.5999968mm"
+            shape="pill"
           />
           <platedhole
             portHints={["alt_0"]}
             pcbX="-4.32511199999999mm"
-            pcbY="1.6807370499998342mm"
-            outerDiameter="1.1999975999999999mm"
-            holeDiameter="0.7999983999999999mm"
-            shape="circle"
+            pcbY="1.4057376499998782mm"
+            outerHeight="1.9999959999999999mm"
+            outerWidth="1.1999975999999999mm"
+            innerHeight="1.5999968mm"
+            innerWidth="0.7999983999999999mm"
+            height="1.5999968mm"
+            shape="pill"
           />
           <platedhole
             portHints={["alt_3"]}
             pcbX="-4.32511199999999mm"
-            pcbY="-2.4990869499999917mm"
-            outerDiameter="1.1999975999999999mm"
-            holeDiameter="0.7999983999999999mm"
-            shape="circle"
+            pcbY="-2.7740863499999477mm"
+            outerHeight="1.7999964mm"
+            outerWidth="1.1999975999999999mm"
+            innerHeight="1.3999972mm"
+            innerWidth="0.7999983999999999mm"
+            height="1.3999972mm"
+            shape="pill"
           />
           <smtpad
             portHints={["B8"]}

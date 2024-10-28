@@ -28,11 +28,11 @@ function grid(opts: {
 const rowToMicroPin = {
   0: "GP0",
   1: "GP1",
-  2: "GP2",
+  2: "GP10",
 }
 const colToMicroPin = {
-  0: "GP3",
-  1: "GP4",
+  0: "GP19",
+  1: "GP17",
   2: "GP5",
 }
 

@@ -1,0 +1,3080 @@
+────────────────────────────────────────────────────────────────────────────────────────────────────────
+Warning: it's best to only add files that need changes to the chat.
+https://aider.chat/docs/troubleshooting/edit-errors.html
+Aider v0.61.0
+Main model: claude-3-5-sonnet-20241022 with diff edit format, infinite output
+Weak model: claude-3-haiku-20240307
+Git repo: .git with 31 files
+Repo-map: disabled
+Added snippets/seveibar/C165948.tsx to the chat.
+Added snippets/seveibar/C17317.tsx to the chat.
+Added snippets/seveibar/C507117.tsx to the chat.
+Added snippets/seveibar/Key.tsx to the chat.
+Added snippets/seveibar/KeyHotSocket.tsx to the chat.
+Added snippets/seveibar/KeyShaftForHotSocket.tsx to the chat.
+Added snippets/seveibar/SmdDiode.tsx to the chat.
+Added snippets/seveibar/a555timer.tsx to the chat.
+Added snippets/seveibar/arduino-nano.tsx to the chat.
+Added snippets/seveibar/atmega328p-au.tsx to the chat.
+Added snippets/seveibar/female-header-6.tsx to the chat.
+Added snippets/seveibar/ft232rl.tsx to the chat.
+Added snippets/seveibar/lm1117impx-5-0.tsx to the chat.
+Added snippets/seveibar/nine-key-keyboard.tsx to the chat.
+Added snippets/seveibar/pico2.tsx to the chat.
+Added snippets/seveibar/push-button.tsx to the chat.
+Added snippets/seveibar/red-led.tsx to the chat.
+Added snippets/seveibar/regulator-5v.tsx to the chat.
+Added snippets/seveibar/smd-usb-c.tsx to the chat.
+Added snippets/seveibar/ttl-counter.tsx to the chat.
+Added snippets/seveibar/usb-c-flashlight.tsx to the chat.
+
+SYSTEM Act as an expert software developer.
+SYSTEM Always use best practices when coding.
+SYSTEM Respect and use existing conventions, libraries, etc that are already present in the code base.
+SYSTEM 
+SYSTEM Take requests for changes to the supplied code.
+SYSTEM If the request is ambiguous, ask questions.
+SYSTEM 
+SYSTEM Always reply to the user in the same language they are using.
+SYSTEM 
+SYSTEM Once you understand the request you MUST:
+SYSTEM 
+SYSTEM 1. Decide if you need to propose *SEARCH/REPLACE* edits to any files that haven't been added to the chat. You can create new files without asking!
+SYSTEM 
+SYSTEM But if you need to propose edits to existing files not already added to the chat, you *MUST* tell the user their full path names and ask them to *add the files to the chat*.
+SYSTEM End your reply and wait for their approval.
+SYSTEM You can keep asking if you then decide you need to edit more files.
+SYSTEM 
+SYSTEM 2. Think step-by-step and explain the needed changes in a few short sentences.
+SYSTEM 
+SYSTEM 3. Describe each change with a *SEARCH/REPLACE block* per the examples below.
+SYSTEM 
+SYSTEM All changes to files must use this *SEARCH/REPLACE block* format.
+SYSTEM ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+SYSTEM 
+SYSTEM 4. *Concisely* suggest any shell commands the user might want to run in ```bash blocks.
+SYSTEM 
+SYSTEM Just suggest shell commands this way, not example code.
+SYSTEM Only suggest complete shell commands that are ready to execute, without placeholders.
+SYSTEM Only suggest at most a few shell commands at a time, not more than 1-3.
+SYSTEM 
+SYSTEM Use the appropriate shell based on the user's system info:
+SYSTEM - Platform: macOS-14.6.1-arm64-arm-64bit
+SYSTEM - Shell: SHELL=/bin/zsh
+SYSTEM - Language: en_US
+SYSTEM - Current date: 2024-11-01
+SYSTEM - The user is operating inside a git repository
+SYSTEM 
+SYSTEM Examples of when to suggest shell commands:
+SYSTEM 
+SYSTEM - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+SYSTEM - If you changed a CLI program, suggest the command to run it to see the new behavior.
+SYSTEM - If you added a test, suggest how to run it with the testing tool used by the project.
+SYSTEM - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+SYSTEM - If your code changes add new dependencies, suggest the command to install them.
+SYSTEM - Etc.
+SYSTEM 
+SYSTEM 
+SYSTEM # Example conversations:
+SYSTEM 
+SYSTEM ## USER: Change get_factorial() to use math.factorial
+SYSTEM 
+SYSTEM ## ASSISTANT: To make this change we need to modify `mathweb/flask/app.py` to:
+SYSTEM 
+SYSTEM 1. Import the math package.
+SYSTEM 2. Remove the existing factorial() function.
+SYSTEM 3. Update get_factorial() to call math.factorial instead.
+SYSTEM 
+SYSTEM Here are the *SEARCH/REPLACE* blocks:
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM from flask import Flask
+SYSTEM =======
+SYSTEM import math
+SYSTEM from flask import Flask
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM def factorial(n):
+SYSTEM     "compute factorial"
+SYSTEM 
+SYSTEM     if n == 0:
+SYSTEM         return 1
+SYSTEM     else:
+SYSTEM         return n * factorial(n-1)
+SYSTEM 
+SYSTEM =======
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM     return str(factorial(n))
+SYSTEM =======
+SYSTEM     return str(math.factorial(n))
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM 
+SYSTEM ## USER: Refactor hello() into its own file.
+SYSTEM 
+SYSTEM ## ASSISTANT: To make this change we need to modify `main.py` and make a new file `hello.py`:
+SYSTEM 
+SYSTEM 1. Make a new hello.py file with hello() in it.
+SYSTEM 2. Remove hello() from main.py and replace it with an import.
+SYSTEM 
+SYSTEM Here are the *SEARCH/REPLACE* blocks:
+SYSTEM 
+SYSTEM hello.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM =======
+SYSTEM def hello():
+SYSTEM     "print a greeting"
+SYSTEM 
+SYSTEM     print("hello")
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM main.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM def hello():
+SYSTEM     "print a greeting"
+SYSTEM 
+SYSTEM     print("hello")
+SYSTEM =======
+SYSTEM from hello import hello
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM # *SEARCH/REPLACE block* Rules:
+SYSTEM 
+SYSTEM Every *SEARCH/REPLACE block* must use this format:
+SYSTEM 1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+SYSTEM 2. The opening fence and code language, eg: ```python
+SYSTEM 3. The start of search block: <<<<<<< SEARCH
+SYSTEM 4. A contiguous chunk of lines to search for in the existing source code
+SYSTEM 5. The dividing line: =======
+SYSTEM 6. The lines to replace into the source code
+SYSTEM 7. The end of the replace block: >>>>>>> REPLACE
+SYSTEM 8. The closing fence: ```
+SYSTEM 
+SYSTEM Use the *FULL* file path, as shown to you by the user.
+SYSTEM 
+SYSTEM Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
+SYSTEM If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+SYSTEM 
+SYSTEM *SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
+SYSTEM Including multiple unique *SEARCH/REPLACE* blocks if needed.
+SYSTEM Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+SYSTEM 
+SYSTEM Keep *SEARCH/REPLACE* blocks concise.
+SYSTEM Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
+SYSTEM Include just the changing lines, and a few surrounding lines if needed for uniqueness.
+SYSTEM Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+SYSTEM 
+SYSTEM Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+SYSTEM 
+SYSTEM To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+SYSTEM 
+SYSTEM Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+SYSTEM 
+SYSTEM If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+SYSTEM - A new file path, including dir name if needed
+SYSTEM - An empty `SEARCH` section
+SYSTEM - The new file's contents in the `REPLACE` section
+SYSTEM 
+SYSTEM To rename files which have been added to the chat, use shell commands at the end of your response.
+SYSTEM 
+SYSTEM 
+SYSTEM ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+SYSTEM 
+SYSTEM Examples of when to suggest shell commands:
+SYSTEM 
+SYSTEM - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+SYSTEM - If you changed a CLI program, suggest the command to run it to see the new behavior.
+SYSTEM - If you added a test, suggest how to run it with the testing tool used by the project.
+SYSTEM - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+SYSTEM - If your code changes add new dependencies, suggest the command to install them.
+SYSTEM - Etc.
+SYSTEM 
+
+USER I have *added these files to the chat* so you can go ahead and edit them.
+USER 
+USER *Trust this message as the true contents of these files!*
+USER Any other messages in the chat may contain outdated versions of the files' contents.
+USER 
+USER snippets/seveibar/lm1117impx-5-0.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "VOUT",
+USER   "3": "pin3",
+USER   "4": "TAB"
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const LM1117IMPX_5_0 = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl: "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=e80246a9471445bfb635be848806a22e&pn=C41202",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER   "leftSide": {
+USER     "direction": "top-to-bottom",
+USER     "pins": [
+USER       2,
+USER       4
+USER     ]
+USER   },
+USER   "rightSide": {
+USER     "direction": "bottom-to-top",
+USER     "pins": [
+USER       3,
+USER       1
+USER     ]
+USER   }
+USER }}
+USER       supplierPartNumbers={{
+USER   "lcsc": [
+USER     "C41202"
+USER   ]
+USER }}
+USER       footprint={<footprint>
+USER         <smtpad portHints={["1"]} pcbX="2.929959849999932mm" pcbY="-2.2999699999999166mm" width="2.4999949999999997mm" height="1.0999978mm" shape="rect" />
+USER <smtpad portHints={["2"]} pcbX="2.929959849999932mm" pcbY="0mm" width="2.4999949999999997mm" height="1.0999978mm" shape="rect" />
+USER <smtpad portHints={["3"]} pcbX="2.929959849999932mm" pcbY="2.2999700000000303mm" width="2.4999949999999997mm" height="1.0999978mm" shape="rect" />
+USER <smtpad portHints={["4"]} pcbX="-3.009957149999991mm" pcbY="0mm" width="2.3400004mm" height="3.5999928mm" shape="rect" />
+USER <silkscreenpath route={[{"x":-1.6114077499998984,"y":-3.3262061999998878},{"x":-1.6114077499998984,"y":3.3262062000000014},{"x":1.3313854499999707,"y":3.3262062000000014},{"x":1.3313854499999707,"y":-3.3262061999998878},{"x":-1.6114077499998984,"y":-3.3262061999998878}]} />
+USER       </footprint>}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useLM1117IMPX_5_0 = createUseComponent(LM1117IMPX_5_0, pinNames)```
+USER 
+USER snippets/seveibar/arduino-nano.tsx
+USER ```
+USER // attempt at an arduino uno clone
+USER import { useFT232RL } from "@tsci/seveibar.ft232rl"
+USER import { useATMEGA328P_AU } from "@tsci/seveibar.atmega328p-au"
+USER import { useLM1117IMPX_5_0 } from "@tsci/seveibar.lm1117impx-5-0"
+USER 
+USER export default () => {
+USER   const U1 = useATMEGA328P_AU("U1")
+USER   const U2 = useLM1117IMPX_5_0("U2")
+USER   const U3 = useFT232RL("U3")
+USER 
+USER   return (
+USER     <board width="50mm" height="50mm">
+USER       <U1 />
+USER       <U2 pcbX={20} />
+USER       <U3 pcbY={20} />
+USER     </board>
+USER   )
+USER }
+USER ```
+USER 
+USER snippets/seveibar/KeyHotSocket.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "pin2",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const KeyHotSocket = (props: Props) => {
+USER   return (
+USER     <chip
+USER       layer="bottom"
+USER       {...props}
+USER       footprint={
+USER         <footprint>
+USER           <hole
+USER             pcbX="3.1749999999999545mm"
+USER             pcbY="-1.2699999999999818mm"
+USER             diameter="2.9999939999999996mm"
+USER           />
+USER           <hole
+USER             pcbX="-3.1749999999999545mm"
+USER             pcbY="1.2700000000000955mm"
+USER             diameter="2.9999939999999996mm"
+USER           />
+USER           <smtpad
+USER             portHints={["2"]}
+USER             pcbX="6.724904000000038mm"
+USER             pcbY="-1.2699999999999818mm"
+USER             width="2.8999941999999996mm"
+USER             height="2.4999949999999997mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["1"]}
+USER             pcbX="-6.724904000000038mm"
+USER             pcbY="1.2699999999999818mm"
+USER             width="2.8999941999999996mm"
+USER             height="2.4999949999999997mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -5.461000000000013, y: -0.4611370000000079 },
+USER               { x: -5.461000000000013, y: -2.9209999999999354 },
+USER               { x: -5.461000000000013, y: -2.9209999999999354 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 5.4500017999999955, y: -2.950006799999869 },
+USER               { x: -5.461000000000013, y: -2.950006799999869 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.18298159999994823, y: 1.0549889999999778 },
+USER               { x: 5.450027199999909, y: 1.0549889999999778 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 5.450027199999909, y: 1.0549889999999778 },
+USER               { x: 5.450027199999909, y: 0.4611370000000079 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.944114000000127, y: 2.9450030000000424 },
+USER               { x: -5.461000000000013, y: 2.9450030000000424 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.707006999999976, y: 2.9450030000000424 },
+USER               { x: -2.944114000000127, y: 2.9450030000000424 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.707006999999976, y: 2.9450030000000424 },
+USER               { x: -1.460311886129034, y: 2.9288336092640748 },
+USER               { x: -1.2178378661753868, y: 2.8806021044970294 },
+USER               { x: -0.9837338087377248, y: 2.801133754218995 },
+USER               { x: -0.762005367588813, y: 2.6917883071702136 },
+USER               { x: -0.5564464426572613, y: 2.5544367262343712 },
+USER               { x: -0.37057426423848483, y: 2.3914291751993915 },
+USER               { x: -0.20756921118118044, y: 2.2055548061152876 },
+USER               { x: -0.07022039279377168, y: 1.9999940353145576 },
+USER               { x: 0.03912207440475868, y: 1.7782641246765252 },
+USER               { x: 0.11858727851722506, y: 1.5441589992735771 },
+USER               { x: 0.1668155246366041, y: 1.301684331151364 },
+USER               { x: 0.18298159999994823, y: 1.0549889999999778 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER       supplierPartNumbers={{
+USER         jlcpcb: ["C5184526"],
+USER       }}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=c886ec2b42464573a88fc1f647577a49&pn=C5184526",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1, 2],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [],
+USER         },
+USER       }}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useKeyHotSocket = createUseComponent(KeyHotSocket, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/pico2.tsx
+USER ```
+USER export const Pico2 = (props: { name: string }) => (
+USER   <chip
+USER     {...props}
+USER     pinLabels={{
+USER       "1": "GP0",
+USER       "2": "GP1",
+USER       "3": "GND1",
+USER       "4": "GP2",
+USER       "5": "GP3",
+USER       "6": "GP4",
+USER       "7": "GP5",
+USER       "8": "GND",
+USER       "9": "GP6",
+USER       "10": "GP7",
+USER       "11": "GP8",
+USER       "12": "GP9",
+USER       "13": "GND2",
+USER       "14": "GP10",
+USER       "15": "GP11",
+USER       "16": "GP12",
+USER       "17": "GP13",
+USER       "18": "GND3",
+USER       "19": "GP14",
+USER       "20": "GP15",
+USER       "21": "GP16",
+USER       "22": "GP17",
+USER       "23": "GND4",
+USER       "24": "GP18",
+USER       "25": "GP19",
+USER       "26": "GP20",
+USER       "27": "GP21",
+USER       "28": "GND5",
+USER       "29": "GP22",
+USER       "30": "RUN",
+USER       "31": "GP26",
+USER       "32": "GP27",
+USER       "33": "GND6",
+USER       "34": "GP28",
+USER       "35": "ADC_VREF",
+USER       "36": "V3V3",
+USER       "37": "V3V3_EN",
+USER       "38": "GND7",
+USER       "39": "VSYS",
+USER       "40": "VBUS",
+USER     }}
+USER     footprint="soic40_w22.58mm_p2.54mm_pl3.8_ph2.2"
+USER   />
+USER )
+USER ```
+USER 
+USER snippets/seveibar/female-header-6.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "pin2",
+USER   "3": "pin3",
+USER   "4": "pin4",
+USER   "5": "pin5",
+USER   "6": "pin6"
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const A_2_54_1_6P_ = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl: "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=c162e59987044c559654f3f6cf872bf9&pn=C40877",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER   "leftSide": {
+USER     "direction": "top-to-bottom",
+USER     "pins": [
+USER       1,
+USER       2,
+USER       3,
+USER       4,
+USER       5,
+USER       6
+USER     ]
+USER   },
+USER   "rightSide": {
+USER     "direction": "bottom-to-top",
+USER     "pins": []
+USER   }
+USER }}
+USER       supplierPartNumbers={{
+USER   "lcsc": [
+USER     "C40877"
+USER   ]
+USER }}
+USER       footprint={<footprint>
+USER         <platedhole  portHints={["6"]} pcbX="6.399999900000012mm" pcbY="0mm" outerDiameter="1.5999967999999998mm" holeDiameter="1.0200131999999997mm" shape="circle" />
+USER <platedhole  portHints={["5"]} pcbX="3.859999900000048mm" pcbY="0mm" outerDiameter="1.5999967999999998mm" holeDiameter="1.0200131999999997mm" shape="circle" />
+USER <platedhole  portHints={["4"]} pcbX="1.3199999000000275mm" pcbY="0mm" outerDiameter="1.5999967999999998mm" holeDiameter="1.0200131999999997mm" shape="circle" />
+USER <platedhole  portHints={["3"]} pcbX="-1.220000099999993mm" pcbY="0mm" outerDiameter="1.5999967999999998mm" holeDiameter="1.0200131999999997mm" shape="circle" />
+USER <platedhole  portHints={["2"]} pcbX="-3.7600000999999565mm" pcbY="0mm" outerDiameter="1.5999967999999998mm" holeDiameter="1.0200131999999997mm" shape="circle" />
+USER <platedhole  portHints={["1"]} pcbX="-6.300000099999977mm" pcbY="0mm" outerDiameter="1.7999964mm" holeDiameter="1.0200131999999997mm" shape="circle" />
+USER <silkscreenpath route={[{"x":-7.799971699999958,"y":0.8999981999999918},{"x":-7.799971699999958,"y":1.2499848},{"x":7.899996900000076,"y":1.2499848},{"x":7.899996900000076,"y":-1.2499848},{"x":-7.799971699999958,"y":-1.2499848},{"x":-7.799971699999958,"y":0.9499854000000028}]} />
+USER       </footprint>}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useA_2_54_1_6P_ = createUseComponent(A_2_54_1_6P_, pinNames)```
+USER 
+USER snippets/seveibar/smd-usb-c.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   1: ["A1", "GND"],
+USER   2: ["B12", "GND"],
+USER   3: ["A4", "VBUS"],
+USER   4: ["B9", "VBUS"],
+USER   5: ["B8", "SBU2"],
+USER   6: ["A5", "CC1"],
+USER   7: ["B7", "Dminus"],
+USER   8: ["A6", "Dplus"],
+USER   9: ["A7", "Dminus"],
+USER   10: ["B6", "Dplus"],
+USER   11: ["A8", "SBU1"],
+USER   12: ["B5", "CC2"],
+USER   13: ["A9", "VBUS"],
+USER   14: ["B4", "VBUS"],
+USER   15: ["A12", "GND"],
+USER   16: ["B1", "GND"]
+USER } as const
+USER const pinNames = ["VBUS", "Dplus", "Dminus", "GND", "CC1", "CC2"] as const
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER /**
+USER  * USB Type C connector (C165948)
+USER  */
+USER export const SmdUsbC = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=2a4bc2358b36497d9ab2a66ab6419ba3&pn=C165948",
+USER         rotationOffset: { x: 0, y: 0, z: 180 },
+USER         positionOffset: { x: 0, y: -2.5, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER       }}
+USER       supplierPartNumbers={{
+USER         jlcpcb: ["C165948"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <hole
+USER             pcbX="-2.8999180000000706mm"
+USER             pcbY="1.180611049999925mm"
+USER             diameter="0.7500111999999999mm"
+USER           />
+USER           <hole
+USER             pcbX="2.8999180000000706mm"
+USER             pcbY="1.180611049999925mm"
+USER             diameter="0.7500111999999999mm"
+USER           />
+USER           <platedhole
+USER             portHints={["alt_2"]}
+USER             pcbX="4.32511199999999mm"
+USER             pcbY="-2.4990869499999917mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["alt_1"]}
+USER             pcbX="4.32511199999999mm"
+USER             pcbY="1.6807370499998342mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["alt_0"]}
+USER             pcbX="-4.32511199999999mm"
+USER             pcbY="1.6807370499998342mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["alt_3"]}
+USER             pcbX="-4.32511199999999mm"
+USER             pcbY="-2.4990869499999917mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <smtpad
+USER             portHints={["B8"]}
+USER             pcbX="-1.7500600000000759mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A5"]}
+USER             pcbX="-1.2499339999999393mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B7"]}
+USER             pcbX="-0.7500619999999572mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A6"]}
+USER             pcbX="-0.2499359999999342mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A7"]}
+USER             pcbX="0.2499359999999342mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B6"]}
+USER             pcbX="0.7500619999999572mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A8"]}
+USER             pcbX="1.2496799999998984mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B5"]}
+USER             pcbX="1.7500600000000759mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A1"]}
+USER             pcbX="-3.3500060000000076mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B12"]}
+USER             pcbX="-3.0500319999999874mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A4"]}
+USER             pcbX="-2.5499059999999645mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B9"]}
+USER             pcbX="-2.249932000000058mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B4"]}
+USER             pcbX="2.249932000000058mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A9"]}
+USER             pcbX="2.5501600000000053mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B1"]}
+USER             pcbX="3.050032000000101mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A12"]}
+USER             pcbX="3.3500060000000076mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -4.4689776000000165, y: -1.40071475000002 },
+USER               { x: -4.4689776000000165, y: 0.4621974499998487 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 4.471009600000116, y: -5.119096950000085 },
+USER               { x: -4.4689776000000165, y: -5.119096950000085 },
+USER               { x: -4.4689776000000165, y: -3.6377943500000356 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 4.471009600000116, y: -1.4010703500000545 },
+USER               { x: 4.471009600000116, y: 0.4625530499999968 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 4.471009600000116, y: -5.119096950000085 },
+USER               { x: 4.471009600000116, y: -3.6374387500002285 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const useUsbC = createUseComponent(SmdUsbC, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/atmega328p-au.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "",
+USER   "2": "",
+USER   "3": "GND",
+USER   "4": "VCC",
+USER   "5": "GND",
+USER   "6": "VCC",
+USER   "7": "",
+USER   "8": "",
+USER   "9": "",
+USER   "10": "",
+USER   "11": "",
+USER   "12": "",
+USER   "13": "",
+USER   "14": "",
+USER   "15": "",
+USER   "16": "",
+USER   "17": "pin17",
+USER   "18": "pin18",
+USER   "19": "pin19",
+USER   "20": "pin20",
+USER   "21": "pin21",
+USER   "22": "pin22",
+USER   "23": "pin23",
+USER   "24": "pin24",
+USER   "25": "pin25",
+USER   "26": "pin26",
+USER   "27": "pin27",
+USER   "28": "pin28",
+USER   "29": "pin29",
+USER   "30": "pin30",
+USER   "31": "pin31",
+USER   "32": "pin32",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const ATMEGA328P_AU = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=4d9f6c3430024506b87ce44b53201fc5&pn=C14877",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       pcbRotation={-90}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [
+USER             32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17,
+USER           ],
+USER         },
+USER       }}
+USER       supplierPartNumbers={{
+USER         lcsc: ["C14877"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <smtpad
+USER             portHints={["32"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="-2.7999943999999886mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["31"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="-1.9999959999999817mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["30"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="-1.1999976000000032mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["29"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="-0.3999991999999821mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["28"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="0.39999920000002476mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["27"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="1.1999976000000032mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["26"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="1.99999600000001mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["25"]}
+USER             pcbX="-4.381500000000003mm"
+USER             pcbY="2.7999944000000028mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["24"]}
+USER             pcbX="-2.7999943999999886mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["23"]}
+USER             pcbX="-1.9999959999999959mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["22"]}
+USER             pcbX="-1.1999976000000032mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["21"]}
+USER             pcbX="-0.3999991999999821mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["20"]}
+USER             pcbX="0.39999919999999634mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["19"]}
+USER             pcbX="1.1999976000000032mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["18"]}
+USER             pcbX="1.99999600000001mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["17"]}
+USER             pcbX="2.7999944000000028mm"
+USER             pcbY="4.368800000000007mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["16"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="2.7999944000000028mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["15"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="1.99999600000001mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["14"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="1.1999976000000032mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["13"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="0.39999920000002476mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["12"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="-0.3999991999999821mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["11"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="-1.1999976000000032mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["10"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="-1.9999959999999817mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["9"]}
+USER             pcbX="4.381500000000003mm"
+USER             pcbY="-2.7999943999999886mm"
+USER             width="1.6500093999999998mm"
+USER             height="0.45001179999999996mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["8"]}
+USER             pcbX="2.7999944000000028mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["7"]}
+USER             pcbX="1.99999600000001mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["6"]}
+USER             pcbX="1.1999976000000032mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["5"]}
+USER             pcbX="0.39999919999999634mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["4"]}
+USER             pcbX="-0.3999991999999821mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["3"]}
+USER             pcbX="-1.1999976000000032mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["2"]}
+USER             pcbX="-1.9999959999999959mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["1"]}
+USER             pcbX="-2.7999943999999886mm"
+USER             pcbY="-4.368799999999993mm"
+USER             width="0.45001179999999996mm"
+USER             height="1.6500093999999998mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.967482000000004, y: -4.825999999999993 },
+USER               { x: -2.819400000000016, y: -4.677917989294684 },
+USER               { x: -2.6713180000000136, y: -4.825999999999993 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.6713180000000136, y: -4.825999999999993 },
+USER               { x: -2.819400000000016, y: -4.9740820107053025 },
+USER               { x: -2.967482000000004, y: -4.825999999999993 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.9626559999999813, y: 2.9499560000000145 },
+USER               { x: -2.9626559999999813, y: -2.949955999999986 },
+USER               { x: 2.937256000000019, y: -2.949955999999986 },
+USER               { x: 2.937256000000019, y: 2.9499560000000145 },
+USER               { x: -2.9626559999999813, y: 2.9499560000000145 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -3.7591999999999928, y: -4.063999999999993 },
+USER               { x: -3.907941055997668, y: -4.214642029703938 },
+USER               { x: -3.7579300000000018, y: -4.364019424014728 },
+USER               { x: -3.6079189440023356, y: -4.214642029703938 },
+USER               { x: -3.7566599999999966, y: -4.063999999999993 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.2123399999999975, y: -1.998980000000003 },
+USER               { x: -2.4015150142161303, y: -2.137897449194128 },
+USER               { x: -2.3284212288967012, y: -2.3609278108984313 },
+USER               { x: -2.0937187711032834, y: -2.3609278108984313 },
+USER               { x: -2.0206249857838543, y: -2.137897449194128 },
+USER               { x: -2.209799999999987, y: -1.998980000000003 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const useATMEGA328P_AU = createUseComponent(ATMEGA328P_AU, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/C507117.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "XTAL1",
+USER   "2": "",
+USER   "3": "GND",
+USER   "4": "VCC",
+USER   "5": "",
+USER   "6": "",
+USER   "7": "",
+USER   "8": "",
+USER   "9": "",
+USER   "10": "",
+USER   "11": "",
+USER   "12": "",
+USER   "13": "",
+USER   "14": "",
+USER   "15": "",
+USER   "16": "",
+USER   "17": "pin17",
+USER   "18": "pin18",
+USER   "19": "pin19",
+USER   "20": "pin20",
+USER   "21": "pin21",
+USER   "22": "pin22",
+USER   "23": "pin23",
+USER   "24": "pin24",
+USER   "25": "pin25",
+USER   "26": "pin26",
+USER   "27": "pin27",
+USER   "28": "pin28",
+USER   "29": "pin29",
+USER   "30": "pin30",
+USER   "31": "pin31",
+USER   "32": "pin32",
+USER   "33": "pin33"
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const ATMEGA16U2_MUR = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       footprint={<footprint>
+USER         <smtpad portHints={["1"]} pcbX="-2.477516000000037mm" pcbY="1.7500599999999622mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["2"]} pcbX="-2.477516000000037mm" pcbY="1.249934000000053mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["3"]} pcbX="-2.477516000000037mm" pcbY="0.7500619999999572mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["4"]} pcbX="-2.477516000000037mm" pcbY="0.2499360000000479mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["5"]} pcbX="-2.477516000000037mm" pcbY="-0.2499359999999342mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["6"]} pcbX="-2.477516000000037mm" pcbY="-0.7500619999999572mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["7"]} pcbX="-2.477516000000037mm" pcbY="-1.2499339999999393mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["8"]} pcbX="-2.477516000000037mm" pcbY="-1.7500599999999622mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["9"]} pcbX="-1.7500600000000759mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["10"]} pcbX="-1.249934000000053mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["11"]} pcbX="-0.7500619999999572mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["12"]} pcbX="-0.2499359999999342mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["13"]} pcbX="0.24993599999982052mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["14"]} pcbX="0.7500619999999572mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["15"]} pcbX="1.2499339999999393mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["16"]} pcbX="1.7500599999999622mm" pcbY="-2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["17"]} pcbX="2.477516000000037mm" pcbY="-1.7500599999999622mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["18"]} pcbX="2.477516000000037mm" pcbY="-1.2499339999999393mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["19"]} pcbX="2.477516000000037mm" pcbY="-0.7500619999999572mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["20"]} pcbX="2.477516000000037mm" pcbY="-0.2499359999999342mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["21"]} pcbX="2.477516000000037mm" pcbY="0.2499360000000479mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["22"]} pcbX="2.477516000000037mm" pcbY="0.7500619999999572mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["23"]} pcbX="2.477516000000037mm" pcbY="1.249934000000053mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["24"]} pcbX="2.477516000000037mm" pcbY="1.7500599999999622mm" width="0.6500114mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["25"]} pcbX="1.7500599999999622mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["26"]} pcbX="1.2499339999999393mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["27"]} pcbX="0.7500619999999572mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["28"]} pcbX="0.24993599999982052mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["29"]} pcbX="-0.2499359999999342mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["30"]} pcbX="-0.7500619999999572mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["31"]} pcbX="-1.249934000000053mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["32"]} pcbX="-1.7500600000000759mm" pcbY="2.477516000000037mm" width="0.2800096mm" height="0.6500114mm" shape="rect" />
+USER <smtpad portHints={["33"]} pcbX="0mm" pcbY="0mm" width="3.7999924mm" height="3.7999924mm" shape="rect" />
+USER <silkscreenpath route={[{"x":-2.0804886000000806,"y":2.5761949999999842},{"x":-2.5761949999999842,"y":2.0804886000000806}]} />
+USER <silkscreenpath route={[{"x":2.080488599999967,"y":2.5761949999999842},{"x":2.5761949999999842,"y":2.5761949999999842},{"x":2.5761949999999842,"y":2.0804886000000806}]} />
+USER <silkscreenpath route={[{"x":2.080488599999967,"y":-2.5761949999998706},{"x":2.5761949999999842,"y":-2.5761949999998706},{"x":2.5761949999999842,"y":-2.080488599999967}]} />
+USER <silkscreenpath route={[{"x":-2.0804886000000806,"y":2.5761949999999842},{"x":-2.5761949999999842,"y":2.5761949999999842},{"x":-2.5761949999999842,"y":2.0804886000000806}]} />
+USER <silkscreenpath route={[{"x":-2.0804886000000806,"y":-2.5761949999998706},{"x":-2.5761949999999842,"y":-2.5761949999998706},{"x":-2.5761949999999842,"y":-2.080488599999967}]} />
+USER       </footprint>}
+USER       cadModel={{
+USER         objUrl: "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=8f04bea36b684c6088784cbd78ede88c&pn=C507117",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER   "leftSide": {
+USER     "direction": "top-to-bottom",
+USER     "pins": [
+USER       1,
+USER       2,
+USER       3,
+USER       4,
+USER       5,
+USER       6,
+USER       7,
+USER       8,
+USER       9,
+USER       10,
+USER       11,
+USER       12,
+USER       13,
+USER       14,
+USER       15,
+USER       16
+USER     ]
+USER   },
+USER   "rightSide": {
+USER     "direction": "bottom-to-top",
+USER     "pins": [
+USER       33,
+USER       32,
+USER       31,
+USER       30,
+USER       29,
+USER       28,
+USER       27,
+USER       26,
+USER       25,
+USER       24,
+USER       23,
+USER       22,
+USER       21,
+USER       20,
+USER       19,
+USER       18,
+USER       17
+USER     ]
+USER   }
+USER }}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useATMEGA16U2_MUR = createUseComponent(ATMEGA16U2_MUR, pinNames)```
+USER 
+USER snippets/seveibar/usb-c-flashlight.tsx
+USER ```
+USER import { useRedLed } from "@tsci/seveibar.red-led"
+USER import { usePushButton } from "@tsci/seveibar.push-button"
+USER import { useUsbC } from "@tsci/seveibar.smd-usb-c"
+USER 
+USER export default () => {
+USER   const USBC = useUsbC("USBC")
+USER   const Button = usePushButton("SW1")
+USER   const Led = useRedLed("LED")
+USER   return (
+USER     <board width="12mm" height="30mm">
+USER       <USBC GND="net.GND" pcbY={-10} VBUS="net.VBUS" />
+USER       <Led neg="net.GND" pcbY={12} />
+USER       <Button pcbY={0} pin2=".R1 > .pos" pin3="net.VBUS" />
+USER       <resistor name="R1" footprint="0603" resistance="1k" pcbY={7} supplierPartNumbers={{
+USER         jlcpcb: ["C22548"]
+USER       }} />
+USER       <trace from=".R1 > .neg" to={Led.pos} />
+USER     </board>
+USER   )
+USER }
+USER ```
+USER 
+USER snippets/seveibar/Key.tsx
+USER ```
+USER import { KeyHotSocket } from "@tsci/seveibar.KeyHotSocket"
+USER import { KeyShaftForHotSocket } from "@tsci/seveibar.KeyShaftForHotSocket"
+USER 
+USER export const Key = (props: { pcbX?: number; pcbY?: number; name: string }) => {
+USER   props.pcbX ??= 0
+USER   props.pcbY ??= 0
+USER   return (
+USER     <group>
+USER       <KeyHotSocket name={props.name} pcbX={props.pcbX} pcbY={props.pcbY} />
+USER       <KeyShaftForHotSocket
+USER         name={`${props.name}_shaft`}
+USER         pcbX={props.pcbX}
+USER         pcbY={props.pcbY - 0.52}
+USER       />
+USER     </group>
+USER   )
+USER }
+USER ```
+USER 
+USER snippets/seveibar/C17317.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "pin2",
+USER   "3": "GND",
+USER   "4": "VCC",
+USER   "5": "pin5",
+USER   "6": "pin6",
+USER   "7": "pin7",
+USER   "8": "pin8",
+USER   "9": "pin9",
+USER   "10": "pin10",
+USER   "11": "pin11",
+USER   "12": "pin12",
+USER   "13": "pin13",
+USER   "14": "pin14",
+USER   "15": "pin15",
+USER   "16": "pin16",
+USER   "17": "pin17",
+USER   "18": "pin18",
+USER   "19": "pin19",
+USER   "20": "pin20",
+USER   "21": "pin21",
+USER   "22": "pin22",
+USER   "23": "pin23",
+USER   "24": "pin24",
+USER   "25": "pin25",
+USER   "26": "pin26",
+USER   "27": "UCAP",
+USER   "28": "UGND",
+USER   "29": "",
+USER   "30": "",
+USER   "31": "UVCC",
+USER   "32": "AVCC",
+USER   "33": "EP"
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const ATMEGA16U2_MU = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       footprint={<footprint>
+USER         <smtpad portHints={["33"]} pcbX="1.1368683772161603e-13mm" pcbY="-1.1368683772161603e-13mm" width="3.3999932mm" height="3.3999932mm" shape="rect" />
+USER <smtpad portHints={["32"]} pcbX="-2.4998679999998785mm" pcbY="-1.7500600000000759mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["31"]} pcbX="-2.4998679999998785mm" pcbY="-1.249934000000053mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["30"]} pcbX="-2.4998679999998785mm" pcbY="-0.7500620000000708mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["29"]} pcbX="-2.4998679999998785mm" pcbY="-0.24993600000016158mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["28"]} pcbX="-2.4998679999998785mm" pcbY="0.2499359999999342mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["27"]} pcbX="-2.4998679999998785mm" pcbY="0.7500619999998435mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["26"]} pcbX="-2.4998679999998785mm" pcbY="1.2499339999998256mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["25"]} pcbX="-2.4998679999998785mm" pcbY="1.7500599999998485mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["24"]} pcbX="-1.748535999999831mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["23"]} pcbX="-1.2484099999999216mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["22"]} pcbX="-0.7485379999999395mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["21"]} pcbX="-0.2484119999999166mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["20"]} pcbX="0.25145999999995183mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["19"]} pcbX="0.7515859999999748mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["18"]} pcbX="1.2514580000001843mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["17"]} pcbX="1.7515840000000935mm" pcbY="2.499867999999992mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["16"]} pcbX="2.499867999999992mm" pcbY="1.7520919999999478mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["15"]} pcbX="2.499867999999992mm" pcbY="1.2519659999999249mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["14"]} pcbX="2.499867999999992mm" pcbY="0.7520939999998291mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["13"]} pcbX="2.499867999999992mm" pcbY="0.2519679999999198mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["12"]} pcbX="2.499867999999992mm" pcbY="-0.24790400000017598mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["11"]} pcbX="2.499867999999992mm" pcbY="-0.7480300000000852mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["10"]} pcbX="2.499867999999992mm" pcbY="-1.247902000000181mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["9"]} pcbX="2.499867999999992mm" pcbY="-1.7480280000000903mm" width="0.7999983999999999mm" height="0.2800096mm" shape="rect" />
+USER <smtpad portHints={["8"]} pcbX="1.7485359999999446mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["7"]} pcbX="1.2486640000001898mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["6"]} pcbX="0.7485380000000532mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["5"]} pcbX="0.2486660000000711mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["4"]} pcbX="-0.25145999999983815mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["3"]} pcbX="-0.7513319999999339mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["2"]} pcbX="-1.2514580000000706mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <smtpad portHints={["1"]} pcbX="-1.7500599999999622mm" pcbY="-2.499868000000106mm" width="0.2800096mm" height="0.7999983999999999mm" shape="rect" />
+USER <silkscreenpath route={[{"x":-2.599842399999943,"y":-2.099995799999988},{"x":-2.599842399999943,"y":-2.3499572000001763},{"x":-2.349931799999922,"y":-2.5998678000001973},{"x":-2.0999703999998474,"y":-2.5998678000001973}]} />
+USER <silkscreenpath route={[{"x":-2.599359800000002,"y":2.597353199999816},{"x":-2.599359800000002,"y":2.0974811999998337}]} />
+USER <silkscreenpath route={[{"x":2.602382400000124,"y":2.597353199999816},{"x":2.1025104000000283,"y":2.597353199999816}]} />
+USER <silkscreenpath route={[{"x":2.5981151999999383,"y":-2.6024078000000372},{"x":2.09824320000007,"y":-2.6024078000000372}]} />
+USER <silkscreenpath route={[{"x":2.602382400000124,"y":2.597353199999816},{"x":2.602382400000124,"y":2.0974811999998337}]} />
+USER <silkscreenpath route={[{"x":2.5981151999999383,"y":-2.6024078000000372},{"x":2.5981151999999383,"y":-2.102535800000169}]} />
+USER <silkscreenpath route={[{"x":-2.599359800000002,"y":2.597353199999816},{"x":-2.099462399999993,"y":2.597353199999816}]} />
+USER       </footprint>}
+USER       cadModel={{
+USER         objUrl: "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=06dba473d10b4dd5b9163c6f32461fab&pn=C17317",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER   "leftSide": {
+USER     "direction": "top-to-bottom",
+USER     "pins": [
+USER       33,
+USER       29,
+USER       30,
+USER       27,
+USER       3,
+USER       32,
+USER       4,
+USER       31,
+USER       28
+USER     ]
+USER   },
+USER   "rightSide": {
+USER     "direction": "bottom-to-top",
+USER     "pins": [
+USER       1,
+USER       2,
+USER       14,
+USER       15,
+USER       16,
+USER       17,
+USER       18,
+USER       19,
+USER       20,
+USER       21,
+USER       5,
+USER       26,
+USER       25,
+USER       23,
+USER       22,
+USER       7,
+USER       8,
+USER       10,
+USER       11,
+USER       12,
+USER       13,
+USER       24,
+USER       6,
+USER       9
+USER     ]
+USER   }
+USER }}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useATMEGA16U2_MU = createUseComponent(ATMEGA16U2_MU, pinNames)```
+USER 
+USER snippets/seveibar/a555timer.tsx
+USER ```
+USER export const A555Timer = ({ name }: { name: string }) => (
+USER   <chip name={name} footprint="dip8_w7.62mm" />
+USER )```
+USER 
+USER snippets/seveibar/ttl-counter.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "CKB",
+USER   "2": "NC",
+USER   "3": "NC",
+USER   "4": "NC",
+USER   "5": "VCC",
+USER   "6": "R0_1",
+USER   "7": "R0_2",
+USER   "8": "QD",
+USER   "9": "QC",
+USER   "10": "GND",
+USER   "11": "QB",
+USER   "12": "QA",
+USER   "13": "NC",
+USER   "14": "CKA",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const SN74LS93N = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=b982590048ce4e04ac9ffac81390dade&pn=C140325",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 2.8 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1, 2, 3, 4, 5, 6, 7],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [14, 13, 12, 11, 10, 9, 8],
+USER         },
+USER       }}
+USER       supplierPartNumbers={{
+USER         lcsc: ["C140325"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <platedhole
+USER             portHints={["1"]}
+USER             pcbX="-7.6200000000000045mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["2"]}
+USER             pcbX="-5.080000000000041mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["3"]}
+USER             pcbX="-2.5400000000000773mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["4"]}
+USER             pcbX="0mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["5"]}
+USER             pcbX="2.5399999999999636mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["6"]}
+USER             pcbX="5.079999999999927mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["7"]}
+USER             pcbX="7.6200000000000045mm"
+USER             pcbY="-3.9999919999999065mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["14"]}
+USER             pcbX="-7.6200000000000045mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["13"]}
+USER             pcbX="-5.080000000000041mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["12"]}
+USER             pcbX="-2.5400000000000773mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["11"]}
+USER             pcbX="0mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["10"]}
+USER             pcbX="2.5399999999999636mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["9"]}
+USER             pcbX="5.079999999999927mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["8"]}
+USER             pcbX="7.6200000000000045mm"
+USER             pcbY="3.99999200000002mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="0.9999979999999999mm"
+USER             shape="circle"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -9.778999999999996, y: 3.175000000000068 },
+USER               { x: -9.778999999999996, y: 1.0160000000000764 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -8.601151200000004, y: -3.1749999999999545 },
+USER               { x: -9.778999999999996, y: -3.1749999999999545 },
+USER               { x: -9.778999999999996, y: -1.0159999999999627 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 8.414410400000065, y: -3.1749999999999545 },
+USER               { x: 9.905999999999835, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 5.874410399999874, y: -3.1749999999999545 },
+USER               { x: 6.825589599999944, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 3.3344103999999106, y: -3.1749999999999545 },
+USER               { x: 4.285589600000094, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.794410399999947, y: -3.1749999999999545 },
+USER               { x: 1.7455896000000166, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.7455896000000166, y: -3.1749999999999545 },
+USER               { x: -0.794410399999947, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -4.285589600000094, y: -3.1749999999999545 },
+USER               { x: -3.3344103999999106, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -6.638848800000119, y: -3.1749999999999545 },
+USER               { x: -5.874410399999988, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 8.414410400000065, y: 3.175000000000068 },
+USER               { x: 9.905999999999835, y: 3.175000000000068 },
+USER               { x: 9.905999999999835, y: -3.1749999999999545 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 5.874410399999874, y: 3.175000000000068 },
+USER               { x: 6.825589599999944, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 3.3344103999999106, y: 3.175000000000068 },
+USER               { x: 4.285589600000094, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.794410399999947, y: 3.175000000000068 },
+USER               { x: 1.7455896000000166, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.7455896000000166, y: 3.175000000000068 },
+USER               { x: -0.794410399999947, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -4.285589600000094, y: 3.175000000000068 },
+USER               { x: -3.3344103999999106, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -6.8255896000000575, y: 3.175000000000068 },
+USER               { x: -5.874410399999988, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -9.778999999999996, y: 3.175000000000068 },
+USER               { x: -8.414410400000065, y: 3.175000000000068 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -9.778999999999996, y: -1.0159999999999627 },
+USER               { x: -9.535855285083812, y: -0.9864768865047608 },
+USER               { x: -9.306841257203587, y: -0.8996233220635759 },
+USER               { x: -9.105267379227257, y: -0.7604869201418296 },
+USER               { x: -8.942848392252017, y: -0.5771537826788062 },
+USER               { x: -8.829023497431649, y: -0.36027856523514856 },
+USER               { x: -8.770407783916426, y: -0.1224652671394324 },
+USER               { x: -8.770407783916426, y: 0.1224652671394324 },
+USER               { x: -8.829023497431649, y: 0.36027856523526225 },
+USER               { x: -8.942848392252017, y: 0.5771537826788062 },
+USER               { x: -9.105267379227257, y: 0.7604869201419433 },
+USER               { x: -9.306841257203587, y: 0.8996233220636896 },
+USER               { x: -9.535855285083812, y: 0.9864768865048745 },
+USER               { x: -9.778999999999996, y: 1.0160000000000764 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const useSN74LS93N = createUseComponent(SN74LS93N, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/push-button.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "pin2",
+USER   "3": "pin3",
+USER   "4": "pin4",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const PushButton = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=6ef04b62f1e945518af209609f65fa6f&pn=C110153",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 3.1 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1, 3],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [4, 2],
+USER         },
+USER       }}
+USER       supplierPartNumbers={{
+USER         jlcpcb: ["C110153"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <platedhole
+USER             portHints={["4"]}
+USER             pcbX="3.2499299999998357mm"
+USER             pcbY="-2.249932000000058mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="1.3000228mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["2"]}
+USER             pcbX="3.2499299999998357mm"
+USER             pcbY="2.249932000000058mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="1.3000228mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["1"]}
+USER             pcbX="-3.2499299999999494mm"
+USER             pcbY="2.249932000000058mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="1.3000228mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["3"]}
+USER             pcbX="-3.2499299999999494mm"
+USER             pcbY="-2.249932000000058mm"
+USER             outerDiameter="1.9999959999999999mm"
+USER             holeDiameter="1.3000228mm"
+USER             shape="circle"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.2743160000001126, y: -2.999994000000015 },
+USER               { x: 2.274315999999999, y: -2.999994000000015 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -2.999994000000129, y: 1.0999978000000965 },
+USER               { x: -2.999994000000129, y: -0.999998000000005 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 3.0999937999998792, y: 1.0279888000000028 },
+USER               { x: 3.0999937999998792, y: -1.0999977999999828 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.99999600000001, y: 2.999994000000015 },
+USER               { x: 2.274315999999999, y: 2.999994000000015 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const usePushButton = createUseComponent(
+USER   PushButton,
+USER   pinNames
+USER )
+USER ```
+USER 
+USER snippets/seveibar/ft232rl.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "TXD",
+USER   "2": "",
+USER   "3": "",
+USER   "4": "VCCIO",
+USER   "5": "RXD",
+USER   "6": "",
+USER   "7": "GND",
+USER   "8": "NC",
+USER   "9": "",
+USER   "10": "",
+USER   "11": "",
+USER   "12": "CBUS4",
+USER   "13": "CBUS2",
+USER   "14": "CBUS3",
+USER   "15": "pin15",
+USER   "16": "pin16",
+USER   "17": "pin17",
+USER   "18": "pin18",
+USER   "19": "pin19",
+USER   "20": "pin20",
+USER   "21": "pin21",
+USER   "22": "pin22",
+USER   "23": "pin23",
+USER   "24": "pin24",
+USER   "25": "pin25",
+USER   "26": "pin26",
+USER   "27": "pin27",
+USER   "28": "pin28",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const FT232RL = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=f6684975c608438e85ae4e120e588908&pn=C490691",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1, 3, 5, 2, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15],
+USER         },
+USER       }}
+USER       supplierPartNumbers={{
+USER         lcsc: ["C490691"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <smtpad
+USER             portHints={["1"]}
+USER             pcbX="-4.225035999999932mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["2"]}
+USER             pcbX="-3.575050000000033mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["3"]}
+USER             pcbX="-2.925064000000134mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["4"]}
+USER             pcbX="-2.2750780000000077mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["5"]}
+USER             pcbX="-1.6250920000001088mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["6"]}
+USER             pcbX="-0.9751059999999825mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["7"]}
+USER             pcbX="-0.32486600000004273mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["8"]}
+USER             pcbX="0.32512000000008356mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["9"]}
+USER             pcbX="0.9751059999999825mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["10"]}
+USER             pcbX="1.625091999999995mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["11"]}
+USER             pcbX="2.2750780000000077mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["12"]}
+USER             pcbX="2.9250640000000203mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["13"]}
+USER             pcbX="3.5750499999999192mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["14"]}
+USER             pcbX="4.225035999999818mm"
+USER             pcbY="-3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["28"]}
+USER             pcbX="-4.225035999999932mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["27"]}
+USER             pcbX="-3.575050000000033mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["26"]}
+USER             pcbX="-2.925064000000134mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["25"]}
+USER             pcbX="-2.2750780000000077mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["24"]}
+USER             pcbX="-1.6250920000001088mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["23"]}
+USER             pcbX="-0.9751059999999825mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["22"]}
+USER             pcbX="-0.32486600000004273mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["21"]}
+USER             pcbX="0.32512000000008356mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["20"]}
+USER             pcbX="0.9751059999999825mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["19"]}
+USER             pcbX="1.625091999999995mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["18"]}
+USER             pcbX="2.2750780000000077mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["17"]}
+USER             pcbX="2.9250640000000203mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["16"]}
+USER             pcbX="3.5750499999999192mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["15"]}
+USER             pcbX="4.225035999999818mm"
+USER             pcbY="3.455161999999973mm"
+USER             width="0.3640074mm"
+USER             height="2.01549mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 5.079999999999927, y: 2.199868600000059 },
+USER               { x: 5.079999999999927, y: -2.158999999999878 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -5.080000000000041, y: -0.6439915999999357 },
+USER               { x: -5.080000000000041, y: -2.1999955999999656 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -5.080000000000041, y: 0.6349999999999909 },
+USER               { x: -5.080000000000041, y: 2.199868600000059 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -5.080000000000041, y: 2.199868600000059 },
+USER               { x: 5.079999999999927, y: 2.199868600000059 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -5.080000000000041, y: -2.1999955999999656 },
+USER               { x: 5.079999999999927, y: -2.1999955999999656 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -5.080000000000041, y: -0.6439915999999357 },
+USER               { x: -5.080000000000041, y: 0.6349999999999909 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const useFT232RL = createUseComponent(FT232RL, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/C165948.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   // "0": "SH",
+USER   // "B1": "GND",
+USER   // "B4": "VBUS",
+USER   // "B5": "CC2",
+USER   // "B6": "DP2",
+USER   // "B7": "DN2",
+USER   // "B8": "SBU2",
+USER   // "B9": "VBUS",
+USER   // "B12": "GND",
+USER   // "A1": "A1",
+USER   // "A4": "A4",
+USER   // "A5": "A5",
+USER   // "A6": "A6",
+USER   // "A7": "A7",
+USER   // "A8": "A8",
+USER   // "A9": "A9",
+USER   // "A12": "A12"
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const TYPE_C_31_M_12 = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=2a4bc2358b36497d9ab2a66ab6419ba3&pn=C165948",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: ["B1", "B4", "B5", "B6", "B7", "B8", "B9", "B12"],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: ["A12", "A9", "A8", "A7", "A6", "A5", "A4", "A1"],
+USER         },
+USER       }}
+USER       supplierPartNumbers={{
+USER         lcsc: ["C165948"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <hole
+USER             pcbX="-2.8999180000000706mm"
+USER             pcbY="1.180611049999925mm"
+USER             diameter="0.7500111999999999mm"
+USER           />
+USER           <hole
+USER             pcbX="2.8999180000000706mm"
+USER             pcbY="1.180611049999925mm"
+USER             diameter="0.7500111999999999mm"
+USER           />
+USER           <platedhole
+USER             portHints={["2"]}
+USER             pcbX="4.32511199999999mm"
+USER             pcbY="-2.4990869499999917mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["1"]}
+USER             pcbX="4.32511199999999mm"
+USER             pcbY="1.6807370499998342mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["0"]}
+USER             pcbX="-4.32511199999999mm"
+USER             pcbY="1.6807370499998342mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["3"]}
+USER             pcbX="-4.32511199999999mm"
+USER             pcbY="-2.4990869499999917mm"
+USER             outerDiameter="1.1999975999999999mm"
+USER             holeDiameter="0.7999983999999999mm"
+USER             shape="circle"
+USER           />
+USER           <smtpad
+USER             portHints={["B8"]}
+USER             pcbX="-1.7500600000000759mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A5"]}
+USER             pcbX="-1.2499339999999393mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B7"]}
+USER             pcbX="-0.7500619999999572mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A6"]}
+USER             pcbX="-0.2499359999999342mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A7"]}
+USER             pcbX="0.2499359999999342mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B6"]}
+USER             pcbX="0.7500619999999572mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A8"]}
+USER             pcbX="1.2496799999998984mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B5"]}
+USER             pcbX="1.7500600000000759mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A1"]}
+USER             pcbX="-3.3500060000000076mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B12"]}
+USER             pcbX="-3.0500319999999874mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A4"]}
+USER             pcbX="-2.5499059999999645mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B9"]}
+USER             pcbX="-2.249932000000058mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B4"]}
+USER             pcbX="2.249932000000058mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A9"]}
+USER             pcbX="2.5501600000000053mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["B1"]}
+USER             pcbX="3.050032000000101mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["A12"]}
+USER             pcbX="3.3500060000000076mm"
+USER             pcbY="2.449087049999889mm"
+USER             width="0.29999939999999997mm"
+USER             height="1.2999973999999999mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -4.4689776000000165, y: -1.40071475000002 },
+USER               { x: -4.4689776000000165, y: 0.4621974499998487 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 4.471009600000116, y: -5.119096950000085 },
+USER               { x: -4.4689776000000165, y: -5.119096950000085 },
+USER               { x: -4.4689776000000165, y: -3.6377943500000356 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 4.471009600000116, y: -1.4010703500000545 },
+USER               { x: 4.471009600000116, y: 0.4625530499999968 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 4.471009600000116, y: -5.119096950000085 },
+USER               { x: 4.471009600000116, y: -3.6374387500002285 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const useTYPE_C_31_M_12 = createUseComponent(TYPE_C_31_M_12, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/KeyShaftForHotSocket.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "pin2",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const KeyShaftForHotSocket = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       footprint={
+USER         <footprint>
+USER           <hole
+USER             pcbX="0.6349999999999909mm"
+USER             pcbY="-3.1149987999999666mm"
+USER             diameter="4.1999916mm"
+USER           />
+USER           {/* <platedhole
+USER             portHints={["1"]}
+USER             pcbX="-3.1749999999999545mm"
+USER             pcbY="-0.574998800000003mm"
+USER             outerDiameter="2.3999951999999998mm"
+USER             holeDiameter="1.5999967999999998mm"
+USER             shape="circle"
+USER           />
+USER           <platedhole
+USER             portHints={["2"]}
+USER             pcbX="3.1749999999999545mm"
+USER             pcbY="1.9650012000000743mm"
+USER             outerDiameter="2.3999951999999998mm"
+USER             holeDiameter="1.5999967999999998mm"
+USER             shape="circle"
+USER           /> */}
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -7.165009800000007, y: 4.685011000000031 },
+USER               { x: 8.435009799999989, y: 4.685011000000031 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -7.165009800000007, y: -10.915008600000078 },
+USER               { x: 8.435009799999989, y: -10.915008600000078 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -7.165009800000007, y: 4.685011000000031 },
+USER               { x: -7.165009800000007, y: -10.915008600000078 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 8.435009799999989, y: 4.685011000000031 },
+USER               { x: 8.435009799999989, y: -10.915008600000078 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=c00f29e7afb64c29bc388e168980ded2&pn=C400227",
+USER         rotationOffset: { x: 0, y: 0, z: 90 },
+USER         positionOffset: { x: 0.58, y: -3.18, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [2],
+USER         },
+USER       }}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useKeyShaftForHotSocket = createUseComponent(KeyShaftForHotSocket, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/SmdDiode.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const SmdDiode = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       footprint={
+USER         <footprint>
+USER           <smtpad
+USER             portHints={["1"]}
+USER             pcbX="-1.1725910000000113mm"
+USER             pcbY="0mm"
+USER             width="0.9999979999999999mm"
+USER             height="0.7500112mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["2"]}
+USER             pcbX="1.1725910000000113mm"
+USER             pcbY="0mm"
+USER             width="0.9999979999999999mm"
+USER             height="0.7500112mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.9012427999999773, y: -0.726211400000011 },
+USER               { x: 0.9012427999999773, y: -0.5199887999999646 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.9012427999999773, y: 0.726211400000011 },
+USER               { x: 0.9012427999999773, y: 0.5299964000000728 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -0.8512047999998913, y: 0.726211400000011 },
+USER               { x: 0.9012427999999773, y: 0.726211400000011 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -0.8512047999998913, y: -0.726211400000011 },
+USER               { x: 0.9012427999999773, y: -0.726211400000011 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -0.44676059999994777, y: 0.726211400000011 },
+USER               { x: -0.44676059999994777, y: -0.726211400000011 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER       supplierPartNumbers={{
+USER         jlcpcb: ["C57759"]
+USER       }}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=973acf8a660c48b1975f1ba1c890421a&pn=C57759",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [2],
+USER         },
+USER       }}
+USER     />
+USER   )
+USER }
+USER ```
+USER 
+USER snippets/seveibar/nine-key-keyboard.tsx
+USER ```
+USER import { SmdDiode } from "@tsci/seveibar.SmdDiode"
+USER import { Key } from "@tsci/seveibar.Key"
+USER import { Pico2 } from "@tsci/seveibar.pico2"
+USER 
+USER function grid(opts: {
+USER   sizeX: number
+USER   sizeY: number
+USER   pitch: number
+USER   offset?: { x: number; y: number }
+USER }): Array<{ x: number; y: number; row: number; col: number }> {
+USER   const { sizeX, sizeY, pitch, offset = { x: 0, y: 0 } } = opts
+USER   const points: Array<{ x: number; y: number; row: number; col: number }> = []
+USER   const startX = (-(sizeX - 1) * pitch) / 2
+USER   const startY = (-(sizeY - 1) * pitch) / 2
+USER   for (let row = 0; row < sizeY; row++) {
+USER     for (let col = 0; col < sizeX; col++) {
+USER       points.push({
+USER         x: startX + col * pitch + offset.x,
+USER         y: startY + row * pitch + offset.y,
+USER         row,
+USER         col,
+USER       })
+USER     }
+USER   }
+USER   return points
+USER }
+USER 
+USER const rowToMicroPin = {
+USER   0: "GP0",
+USER   1: "GP1",
+USER   2: "GP2",
+USER }
+USER const colToMicroPin = {
+USER   0: "GP3",
+USER   1: "GP4",
+USER   2: "GP5",
+USER }
+USER 
+USER export default () => (
+USER   <board width="100mm" height="100mm">
+USER     <Pico2 name="U1" pcbX={-30} />
+USER     {grid({ sizeX: 3, sizeY: 3, pitch: 19.05, offset: { x: 20, y: 0 } }).map(
+USER       ({ x, y, row, col }, index) => (
+USER         <group key={`Kgroup${index}`}>
+USER           <Key pcbX={x} pcbY={y} name={`K${index + 1}`} />
+USER           <SmdDiode
+USER             pcbX={x}
+USER             pcbY={y - 13}
+USER             layer="bottom"
+USER             name={`D${index + 1}`}
+USER           />
+USER           <trace from={`.D${index + 1} .pin1`} to={`.K${index + 1} .pin1`} />
+USER           <trace
+USER             from={`.D${index + 1} .pin2`}
+USER             to={`.U1 .${rowToMicroPin[row]}`}
+USER           />
+USER           <trace
+USER             from={`.K${index + 1} .pin2`}
+USER             to={`.U1 .${colToMicroPin[col]}`}
+USER           />
+USER         </group>
+USER       )
+USER     )}
+USER   </board>
+USER )
+USER ```
+USER 
+USER snippets/seveibar/red-led.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pos",
+USER   "2": "neg",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const RedLed = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=d0740cb8891c49a88b6949cb978926f3&pn=C965799",
+USER         rotationOffset: { x: 0, y: 0, z: 0 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [1],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [2],
+USER         },
+USER       }}
+USER       supplierPartNumbers={{
+USER         jlcpcb: ["C965799"],
+USER       }}
+USER       footprint={
+USER         <footprint>
+USER           <smtpad
+USER             portHints={["2"]}
+USER             pcbX="-0.7995919999999614mm"
+USER             pcbY="-0.003428999999982807mm"
+USER             width="0.7999983999999999mm"
+USER             height="0.7999983999999999mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["1"]}
+USER             pcbX="0.7995919999999614mm"
+USER             pcbY="0.003428999999982807mm"
+USER             width="0.7999983999999999mm"
+USER             height="0.7999983999999999mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.22047200000019984, y: -0.3235452000000123 },
+USER               { x: 0.2105660000000853, y: -0.3235452000000123 },
+USER               { x: -0.11953239999991183, y: 0.006477000000018052 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.22047200000019984, y: 0.3564890000001242 },
+USER               { x: 0.22047200000019984, y: 0.3464814000001297 },
+USER               { x: -0.11953239999991183, y: 0.006477000000018052 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.22047200000019984, y: 0.3564890000001242 },
+USER               { x: 0.22047200000019984, y: -0.3235452000000123 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.24051260000010188, y: 0.7565136000000621 },
+USER               { x: 1.3905738000000838, y: 0.7565136000000621 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.24051260000010188, y: -0.7436103999999659 },
+USER               { x: 1.3905738000000838, y: -0.7436103999999659 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 1.3905738000000838, y: 0.7564628000000084 },
+USER               { x: 1.3905738000000838, y: -0.7235189999998966 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -0.1394967999997334, y: -0.7458963999999924 },
+USER               { x: -1.1896089999999049, y: -0.7458963999999924 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.4895575999997845, y: -0.345795599999974 },
+USER               { x: -1.4895575999997845, y: -0.4458207999998649 },
+USER               { x: -1.1896089999999049, y: -0.7458963999999924 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.4895575999997845, y: 0.3541268000000173 },
+USER               { x: -1.4895575999997845, y: -0.345795599999974 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.4895575999997845, y: 0.3541268000000173 },
+USER               { x: -1.4895575999997845, y: 0.4542790000000423 },
+USER               { x: -1.1896089999999049, y: 0.7542276000000356 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -0.1394967999997334, y: 0.7542276000000356 },
+USER               { x: -1.1896089999999049, y: 0.7542276000000356 },
+USER             ]}
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: 0.22047200000019984, y: 0.006477000000018052 },
+USER               { x: -0.11953239999991183, y: 0.006477000000018052 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER     />
+USER   )
+USER }
+USER 
+USER export const useRedLed = createUseComponent(RedLed, pinNames)
+USER ```
+USER 
+USER snippets/seveibar/regulator-5v.tsx
+USER ```
+USER import { createUseComponent } from "@tscircuit/core"
+USER import type { CommonLayoutProps } from "@tscircuit/props"
+USER 
+USER const pinLabels = {
+USER   "1": "pin1",
+USER   "2": "pin2",
+USER   "3": "pin3",
+USER   "4": "TAB",
+USER } as const
+USER const pinNames = Object.values(pinLabels)
+USER 
+USER interface Props extends CommonLayoutProps {
+USER   name: string
+USER }
+USER 
+USER export const NCP1117ST50T3G = (props: Props) => {
+USER   return (
+USER     <chip
+USER       {...props}
+USER       footprint={
+USER         <footprint>
+USER           <smtpad
+USER             portHints={["1"]}
+USER             pcbX="2.857499999999959mm"
+USER             pcbY="-2.2999699999999166mm"
+USER             width="2.4649938000000002mm"
+USER             height="1.0500106mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["2"]}
+USER             pcbX="2.857499999999959mm"
+USER             pcbY="0mm"
+USER             width="2.4649938000000002mm"
+USER             height="1.0500106mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["3"]}
+USER             pcbX="2.857499999999959mm"
+USER             pcbY="2.2999700000000303mm"
+USER             width="2.4649938000000002mm"
+USER             height="1.0500106mm"
+USER             shape="rect"
+USER           />
+USER           <smtpad
+USER             portHints={["4"]}
+USER             pcbX="-2.8575000000000728mm"
+USER             pcbY="0mm"
+USER             width="2.4649938000000002mm"
+USER             height="3.5399979999999998mm"
+USER             shape="rect"
+USER           />
+USER           <silkscreenpath
+USER             route={[
+USER               { x: -1.3963904000000866, y: -3.4012124000000767 },
+USER               { x: -1.3963904000000866, y: 3.4012124000000767 },
+USER               { x: 1.396390399999973, y: 3.4012124000000767 },
+USER               { x: 1.396390399999973, y: -3.4012124000000767 },
+USER               { x: -1.3963904000000866, y: -3.4012124000000767 },
+USER             ]}
+USER           />
+USER         </footprint>
+USER       }
+USER       cadModel={{
+USER         objUrl:
+USER           "https://modelcdn.tscircuit.com/easyeda_models/download?uuid=e80246a9471445bfb635be848806a22e&pn=C17314",
+USER         rotationOffset: { x: 0, y: 0, z: 180 },
+USER         positionOffset: { x: 0, y: 0, z: 0 },
+USER       }}
+USER       pinLabels={pinLabels}
+USER       schPinSpacing={0.75}
+USER       schPortArrangement={{
+USER         leftSide: {
+USER           direction: "top-to-bottom",
+USER           pins: [4],
+USER         },
+USER         rightSide: {
+USER           direction: "bottom-to-top",
+USER           pins: [3, 2, 1],
+USER         },
+USER       }}
+USER     />
+USER   )
+USER }
+USER 
+USER export const useNCP1117ST50T3G = createUseComponent(NCP1117ST50T3G, pinNames)
+USER ```
+
+ASSISTANT Ok, any changes I propose will be to those files.
+
+USER Hello!
+USER 
+USER # *SEARCH/REPLACE block* Rules:
+USER 
+USER Every *SEARCH/REPLACE block* must use this format:
+USER 1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+USER 2. The opening fence and code language, eg: ```python
+USER 3. The start of search block: <<<<<<< SEARCH
+USER 4. A contiguous chunk of lines to search for in the existing source code
+USER 5. The dividing line: =======
+USER 6. The lines to replace into the source code
+USER 7. The end of the replace block: >>>>>>> REPLACE
+USER 8. The closing fence: ```
+USER 
+USER Use the *FULL* file path, as shown to you by the user.
+USER 
+USER Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
+USER If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+USER 
+USER *SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
+USER Including multiple unique *SEARCH/REPLACE* blocks if needed.
+USER Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+USER 
+USER Keep *SEARCH/REPLACE* blocks concise.
+USER Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
+USER Include just the changing lines, and a few surrounding lines if needed for uniqueness.
+USER Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+USER 
+USER Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+USER 
+USER To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+USER 
+USER Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+USER 
+USER If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+USER - A new file path, including dir name if needed
+USER - An empty `SEARCH` section
+USER - The new file's contents in the `REPLACE` section
+USER 
+USER To rename files which have been added to the chat, use shell commands at the end of your response.
+USER 
+USER 
+USER ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+USER 
+USER Examples of when to suggest shell commands:
+USER 
+USER - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+USER - If you changed a CLI program, suggest the command to run it to see the new behavior.
+USER - If you added a test, suggest how to run it with the testing tool used by the project.
+USER - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+USER - If your code changes add new dependencies, suggest the command to install them.
+USER - Etc.
+USER 

@@ -2,6 +2,9 @@
   "name": "featured-snippets",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "build:aider-prompt": "aider --map-tokens 0 --no-auto-commits --show-prompts $(find snippets -type file) --message '{INSERT_PROMPT_HERE}' > prompt.txt"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@tscircuit/core": "^0.0.126",

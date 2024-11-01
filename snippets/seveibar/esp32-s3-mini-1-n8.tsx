@@ -76,7 +76,6 @@ const pinLabels = {
   pin72: ["GND14"],
   pin73: ["GND15"],
 } as const
-const pinNames = Object.values(pinLabels)
 
 interface Props extends CommonLayoutProps {
   name: string
@@ -730,5 +729,5 @@ export const ESP32_S3_MINI_1_N8 = (props: Props) => {
 
 export const useESP32_S3_MINI_1_N8 = createUseComponent(
   ESP32_S3_MINI_1_N8,
-  pinNames
+  pinLabels
 )

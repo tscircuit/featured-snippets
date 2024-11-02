@@ -1,8 +1,9 @@
 import { useRedLed } from "@tsci/seveibar.red-led"
 import { useTPS74601PDRVR } from "@tsci/seveibar.reg-5v-to-3v-C2837407"
-import { useResistor, useCapacitor } from "@tscircuit/core"
+import { useResistor, useCapacitor, createUseComponent } from "@tscircuit/core"
+import type { CommonLayoutProps } from "@tscircuit/props"
 
-export const MyChip = (props: { name: string }) => {
+export const Reg5vTo3v3 = (props: { name: string } & CommonLayoutProps) => {
   const PWR1 = useTPS74601PDRVR("PWR1")
   const R6 = useResistor("R6", { resistance: "1M", footprint: "0402" })
   const R7 = useResistor("R7", { resistance: "200k", footprint: "0402" })
@@ -12,7 +13,7 @@ export const MyChip = (props: { name: string }) => {
   const LED1 = useRedLed("LED1")
 
   return (
-    <group>
+    <group {...props}>
       <PWR1
         pcbX={4}
         pcbRotation="90deg"

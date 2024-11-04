@@ -1,6 +1,8 @@
 {
   "name": "@tscircuit/featured-snippets",
-  "main": "main/dist.index.js",
+  "main": "dist/index.js",
+  "version": "0.0.1",
+  "repository": "https://github.com/tscircuit/featured-snippets",
   "type": "module",
   "scripts": {
     "build": "bun build:vfs && bun build:tsup",

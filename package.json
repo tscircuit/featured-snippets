@@ -1,25 +1,25 @@
 {
-  "name": "featured-snippets",
-  "module": "index.ts",
+  "name": "@tscircuit/featured-snippets",
+  "main": "main/dist.index.js",
   "type": "module",
   "scripts": {
-    "build:aider-prompt": "aider --map-tokens 0 --no-auto-commits --show-prompts $(find snippets -type file) --message '{INSERT_PROMPT_HERE}' > prompt.txt"
+    "build": "bun build:vfs && bun build:tsup",
+    "build:aider-prompt": "aider --map-tokens 0 --no-auto-commits --show-prompts $(find snippets -type file) --message '{INSERT_PROMPT_HERE}' > prompt.txt",
+    "build:encode-prompt": "bun run scripts/encode-prompt-txt.ts",
+    "build:vfs": "make-vfs --dir snippets --content-format string --outfile ./lib/generated/snippets-vfs.ts",
+    "build:tsup": "tsup-node ./lib/index.ts --format esm --sourcemap --dts"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@tscircuit/core": "^0.0.126",
     "@types/bun": "latest",
-    "react": "^18.3.1"
+    "make-vfs": "^1.0.15",
+    "react": "^18.3.1",
+    "tsup": "^8.3.5",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "dependencies": {
-    "zod": "^3.23.8"
-  }
-}
-{
-  "scripts": {
-    "encode-prompt": "bun run scripts/encode-prompt-txt.ts"
-  }
+  "dependencies": {}
 }

@@ -1,31 +1,29 @@
 import fs from "node:fs"
 import path from "node:path"
 
-const promptPath = path.join(process.cwd(), "prompt.txt")
+const promptPath = path.join(import.meta.dir, "../prompt.txt")
 const promptText = fs.readFileSync(promptPath, "utf-8")
 
 // Clean up the prompt text by removing SYSTEM/USER prefixes and normalizing
 const cleanedPrompt = promptText
   .split("\n")
-  .map((line) => line.replace(/^(SYSTEM|USER)\s+/, ""))
+  .filter((line) => !(line.startsWith("SYSTEM") || line.startsWith("USER")))
   .join("\n")
 
-// Create JSON format for API compatibility
-const promptJson = {
-  system: cleanedPrompt,
-}
+// // Create JSON format for API compatibility
+// const promptJson = {
+//   system: cleanedPrompt,
+// }
 
-// Encode the cleaned prompt
-const encodedPrompt = encodeURIComponent(cleanedPrompt)
+// // Encode the cleaned prompt
+// const encodedPrompt = encodeURIComponent(cleanedPrompt)
 
-// Update index.ts with the encoded prompt
-const indexPath = path.join(process.cwd(), "index.ts")
-const indexContent = `import "@tscircuit/core"
+// // Update index.ts with the encoded prompt
+// const promptTsPath = path.join(import.meta.dir, "../lib/generated/prompt.ts")
+// const promptTsContent = `
+// export const FEATURE_SNIPPETS_PROMPT = ${JSON.stringify(promptJson, null, 2)}
+// `
 
-export const FEATURE_SNIPPETS_PROMPT = decodeURIComponent("${encodedPrompt}")
-export const FEATURE_SNIPPETS_PROMPT_JSON = ${JSON.stringify(promptJson, null, 2)}
-`
+// fs.writeFileSync(promptTsPath, promptTsContent)
 
-fs.writeFileSync(indexPath, indexContent)
-
-console.log("Encoded prompt and updated index.ts")
+// console.log("Encoded prompt and updated lib/generated/prompt.ts")

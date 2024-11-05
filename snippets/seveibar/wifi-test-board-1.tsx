@@ -10,11 +10,11 @@ export default () => {
   const R2 = useResistor("R2", { resistance: "5.1k", footprint: "0402" })
   
   return (
-    <board width="100mm" height="100mm">
+    <board width="20mm" height="48mm" schAutoLayoutEnabled>
       <Usb
         pcbY={-20}
       />
-      <Esp32 pcbY={5}  />
+      <Esp32 pcbY={5} />
       <Reg5vTo3v3 pcbX={2} pcbY={-12} />
       <R1 pcbX={-5} pcbY={-15} pin1={Usb.CC1} pin2="net.gnd" />
       <R2 pcbX={-5} pcbY={-12} pin1={Usb.CC2} pin2="net.gnd" />

@@ -22,12 +22,12 @@ export const Reg5vTo3v3 = (props: { name: string } & CommonLayoutProps) => {
         IN="net.v5"
         OUT="net.v3_3"
       />
-      <R6 pcbX={7} pcbY={-0.5} pin1={PWR1.OUT} pcbRotation="180deg" />
-      <R7 pcbX={6} pcbY={1} pcbRotation="90deg" />
-      <R8 pcbRotation="180deg" pcbX={7} pcbY={-3} pin1="net.v3_3" />
-      <C6 neg="net.gnd" pos="net.v5" />
-      <C7 pcbRotation="180deg" pcbX={0} pcbY={-2} pos="net.v3_3" neg="net.gnd" />
-      <LED1 pcbX={4} pcbY={-3} neg="net.gnd" pos={R8.pin2} />
+      <R6 pcbX={7} pcbY={-0.5} pin1={PWR1.OUT} pcbRotation="180deg" schX={-3} />
+      <R7 pcbX={6} pcbY={1} pcbRotation="90deg" schX={-3} schY={-2} />
+      <R8 pcbRotation="180deg" pcbX={7} pcbY={-3} pin1="net.v3_3" schX={-3} schY={2} />
+      <C6 neg="net.gnd" pos="net.v5" schX={3} schY={-1.5} />
+      <C7 pcbRotation="180deg" pcbX={0} pcbY={-3} pos="net.v3_3" neg="net.gnd" schX={3} />
+      <LED1 pcbX={4} pcbY={-3} neg="net.gnd" pos={R8.pin2} schX={4} schY={3} />
 
       <trace from={PWR1.FB} to={R6.pin2} />
       <trace from={PWR1.FB} to={R7.pin1} />

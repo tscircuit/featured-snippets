@@ -39,7 +39,6 @@ export const SmdUsbC = (props: Props) => {
         positionOffset: { x: 0, y: -2.5, z: 0 },
       }}
       pinLabels={pinLabels}
-      schPinSpacing={0.75}
       supplierPartNumbers={{
         jlcpcb: ["C165948"],
       }}
